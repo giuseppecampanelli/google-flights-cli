@@ -14,14 +14,16 @@ class FlightFinder:
     _to: str
     _start: str
     _end: str
-    _stops: str
+    _stops: int
+    _passengers: int
     _url: str
 
-    def __init__(self, _from, _to, _start, _end=None, _stops=None):
+    def __init__(self, _from, _to, _start, _end=None, _passengers=None, _stops=None):
         self._from = _from
         self._to = _to
         self._start = _start
         self._end = _end
+        self._passengers = _passengers
         self._stops = _stops
 
         self.__generate_url()
@@ -34,6 +36,9 @@ class FlightFinder:
 
         if self._stops:
             self._url += ";s:{}*{}".format(self._stops, self._stops)
+
+        if self._passengers:
+            self._url += ";px:{}".format(self._passengers)
 
         if self._end:
             self._url += ";t:f"
@@ -79,10 +84,10 @@ class FlightFinder:
 
         driver.close()
         
-        return result
+        return json.dumps(result)
     
     def __get_flight_data(self, flight):
-        flight_data = FlightData(self._from, self._to, self._start, self._url, _end=self._end)
+        flight_data = FlightData(self._from, self._to, self._start, self._url, _end=self._end, _passengers=self._passengers)
         
         price = flight.find_element_by_xpath("div/div[1]/div[2]/div[1]/div[1]/div[6]/div[1]").text
         flight_data.set_price(int(re.sub("[^0-9]", "", price)))

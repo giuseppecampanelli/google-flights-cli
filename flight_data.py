@@ -4,16 +4,18 @@ class FlightData:
     _start: str
     _end: str
     _airlines: []
+    _passengers: int
     _price: int
     _connections: []
     _url: str
 
-    def __init__(self, _from, _to, _start, _url, _end=None, _airlines=None, _price=None, _connections=None,):
+    def __init__(self, _from, _to, _start, _url, _end=None, _airlines=None, _passengers=1, _price=None, _connections=None,):
         self._from = _from
         self._to = _to
         self._start = _start
         self._end = _end
         self._airlines = _airlines
+        self._passengers = _passengers
         self._price = _price
         self._connections = _connections
         self._url = _url
@@ -32,6 +34,9 @@ class FlightData:
 
     def set_airlines(self, _airlines):
         self._airlines = _airlines
+
+    def set_passengers(self, _passengers):
+        self._passengers = _passengers
 
     def set_price(self, _price):
         self._price = _price
@@ -56,6 +61,9 @@ class FlightData:
 
     def get_airlines(self):
         return self._airlines
+
+    def get_passengers(self):
+        return self._passengers
     
     def get_price(self):
         return self._price
