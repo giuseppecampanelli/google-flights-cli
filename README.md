@@ -14,7 +14,7 @@ CLI for Google Flights using Selenium
 
 ## Usage
 
-`python3 init.py --from "YUL" --to "CDG" --start "2020-06-10" [--end "2020-06-20"] [--stops 2]`
+`python3 search.py --from "YUL" --to "CDG" --start "2020-06-10" [--end "2020-06-20"] [--stops 2]`
 
 ## Contributing
 
