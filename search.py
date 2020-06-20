@@ -12,7 +12,7 @@ from flight_finder import FlightFinder
 @click.option("--stops", "-c", "stops_", type=int, help="The maximum amount of stops.")
 @click.option('--cheapest', "cheapest_", is_flag=True)
 
-def init(from_, to_, start_, end_, passengers_, stops_, cheapest_):
+def search(from_, to_, start_, end_, passengers_, stops_, cheapest_):
     ff = FlightFinder(from_, to_, start_, end_, passengers_, stops_)
     
     if cheapest_:
@@ -23,4 +23,4 @@ def init(from_, to_, start_, end_, passengers_, stops_, cheapest_):
     print(result)
 
 if __name__ == '__main__':
-    init()
+    search()
