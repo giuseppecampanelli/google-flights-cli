@@ -30,5 +30,29 @@ def find_flights_passengers_stops(from_, to_, start_, end_, stops_):
     
     return ff.find_flights()
 
+@app.route('/cheapest/<from_>/<to_>/<start_>/<end_>')
+def find_cheapest(from_, to_, start_, end_):
+    ff = FlightFinder(from_, to_, start_, end_)
+    
+    return ff.find_flight()
+
+@app.route('/cheapest/<from_>/<to_>/<start_>/<end_>/<passengers_>')
+def find_cheapest_passengers(from_, to_, start_, end_, passengers_):
+    ff = FlightFinder(from_, to_, start_, end_, passengers_)
+    
+    return ff.find_flight()
+
+@app.route('/cheapest/<from_>/<to_>/<start_>/<end_>/<stops_>')
+def find_cheapest_stops(from_, to_, start_, end_, stops_):
+    ff = FlightFinder(from_, to_, start_, end_, None, stops_)
+    
+    return ff.find_flight()
+
+@app.route('/cheapest/<from_>/<to_>/<start_>/<end_>/<passengers_>/<stops_>')
+def find_cheapest_passengers_stops(from_, to_, start_, end_, stops_):
+    ff = FlightFinder(from_, to_, start_, end_, passengers_, stops_)
+    
+    return ff.find_flight()
+
 if __name__ == '__main__':
     app.run(debug=True)
