@@ -6,6 +6,12 @@ from flight_finder import FlightFinder
 app = Flask(__name__)
 api = Api(app)
 
+@app.route('/flights/<from_>/<to_>/<start_>')
+def find_flights_oneway(from_, to_, start_):
+    ff = FlightFinder(from_, to_, start_)
+    
+    return ff.find_flights()
+
 @app.route('/flights/<from_>/<to_>/<start_>/<end_>')
 def find_flights(from_, to_, start_, end_):
     ff = FlightFinder(from_, to_, start_, end_)
@@ -29,6 +35,12 @@ def find_flights_passengers_stops(from_, to_, start_, end_, stops_):
     ff = FlightFinder(from_, to_, start_, end_, passengers_, stops_)
     
     return ff.find_flights()
+
+@app.route('/cheapest/<from_>/<to_>/<start_>')
+def find_cheapest_oneway(from_, to_, start_):
+    ff = FlightFinder(from_, to_, start_)
+    
+    return ff.find_flight()
 
 @app.route('/cheapest/<from_>/<to_>/<start_>/<end_>')
 def find_cheapest(from_, to_, start_, end_):
