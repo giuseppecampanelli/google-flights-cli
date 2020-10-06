@@ -5,6 +5,7 @@ CLI for Google Flights using Selenium
 
 * [Python 3](https://www.python.org/)
 * [Selenium](https://www.selenium.dev/)
+* [Flask] (https://flask.palletsprojects.com/en/1.1.x/)
 
 ### Installing
 
