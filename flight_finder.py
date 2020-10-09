@@ -19,6 +19,62 @@ class FlightFinder:
     _url: str
 
     def __init__(self, _from, _to, _start, _end=None, _passengers=None, _stops=None):
+        
+        ## Check from , to is not empty
+        if not _from or len(_from.strip()) == 0:
+            raise ValueError("From was empty")
+        
+        if not _to or len(_to.strip()) == 0:
+            raise ValueError("To was empty")
+
+        if _from.upper() == _to.upper() :
+            raise ValueError("From and To must not same place")
+
+        _from = _from.upper()
+        _to   = _to.upper()
+
+        ## Check start , date is not empty and input with format (YYYY-MM-DD)
+        if not _start or len(_start.strip()) == 0:
+            raise ValueError("Start was empty")
+        else :
+            try:
+                datetime.strptime(_start, '%Y-%m-%d')
+            except ValueError:
+                raise ValueError("Incorrect date format, it must be with YYYY-MM-DD")
+
+        if not _end is None or len(_end.strip()) > 0:
+            try:
+                datetime.strptime(_end, '%Y-%m-%d')
+            except ValueError:
+                raise ValueError("Incorrect date format, it must be with YYYY-MM-DD")
+        
+        ## Check start,end must be not less than today
+        if datetime.strptime(_start, '%Y-%m-%d') < datetime.now() :
+            raise ValueError("Start Date must be more than or equal Today")
+
+        if not _end is None :
+            if datetime.strptime(_end, '%Y-%m-%d') < datetime.now() :
+                raise ValueError("End Date must be more than or equal Today")
+        
+        ## Check start,must more than end (in case : end is not None)
+        if not _end is None :
+            if not datetime.strptime(_start, '%Y-%m-%d') < datetime.strptime(_end, '%Y-%m-%d') :
+                raise ValueError("End Date must be more than or equal Start")
+
+        ## Check stop must be integer and > 0
+        if not _stops is None :
+            if not isinstance(_stops, int) :
+                raise ValueError("Stop must be decimal")
+            if int(_stops) < 0 :
+                raise ValueError("Stop must be more than 0")
+
+        ## Check passanger must be integer and > 0
+        if not _passengers is None :
+            if not isinstance(_passengers, int) :
+                raise ValueError("Passanger must be decimal")
+            if int(_passengers) < 1 :
+                raise ValueError("Passanger must be more than 1")
+                
         self._from = _from
         self._to = _to
         self._start = _start
